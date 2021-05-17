@@ -25,11 +25,12 @@ async function showFiles() {
 }
 
 async function postFile() {
+    // for file upload, must use FormData not object
     const payload = new FormData();
     const text = document.querySelector('#uploadText');
     const file = document.querySelector('#file');
     payload.append('text',  text.value);
-    payload.append('pdfFile', file.files[0]);
+    payload.append('pdfFile', file.files[0]); // only want one file, use .files[0]
 
     const response = await fetch('/upload', {
         method: 'POST',
